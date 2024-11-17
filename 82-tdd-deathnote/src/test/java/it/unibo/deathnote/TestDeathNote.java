@@ -58,21 +58,30 @@ class TestDeathNote {
     }
 
     @Test
-    public void testWritingCauseOfDeath1() throws InterruptedException {
-        checkWritingWithoutAName();
+    public void testCauseOfDeath() throws InterruptedException {
+
+        try{
+            book.writeDeathCause("Mario");
+            fail("Trying writing cause of deasth");
+        } catch (IllegalArgumentException ignored) {
+        }
         book.writeName("Mario");
         assertEquals(book.getDeathCause("Mario"), DeathNote.DEFAULT_DEATH_CAUSE);
         book.writeName("Sandro");
         assertTrue(book.writeDeathCause("Karting accident"));
         assertEquals(book.getDeathCause("Sandro"), "Karting accident");
         sleep(100);
-        assertFalse(book.writeDeathCause("Karting accident"));
-        assertEquals(book.getDeathCause("Sandro"), DeathNote.DEFAULT_DEATH_CAUSE);
+        assertFalse(book.writeDeathCause("Diarrhea"));
+        assertEquals(book.getDeathCause("Sandro"), "Karting accident");
     }
 
     @Test
-    public void testWritingCauseOfDeath2() throws InterruptedException {
-        checkWritingWithoutAName();
+    public void testDetailsOfDeath() throws InterruptedException {
+        try{
+            book.writeDeathCause("Mario");
+            fail("Trying writing cause of deasth");
+        } catch (IllegalArgumentException ignored) {
+        }
         book.writeName("Mario");
         assertNull(book.getDeathDetails("Mario"));
         assertTrue(book.writeDetails("ran for too long"));
@@ -81,13 +90,5 @@ class TestDeathNote {
         sleep(6100);
         assertFalse(book.writeDetails("diarrhea"));
         assertNull(book.getDeathDetails("Sandro"));
-    }
-
-    private void checkWritingWithoutAName() {
-        try{
-            book.writeDeathCause("Mario");
-            fail("Trying writing cause of deasth");
-        } catch (IllegalArgumentException ignored) {
-        }
     }
 }
