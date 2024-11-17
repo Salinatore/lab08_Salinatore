@@ -71,6 +71,8 @@ public interface DeathNote {
         """
     );
 
+    String DEFAULT_DEATH_CAUSE = "HEART_ATTACK";
+
     /**
      * Returns the rule with the given number.
      *
