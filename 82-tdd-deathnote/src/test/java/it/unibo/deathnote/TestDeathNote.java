@@ -58,35 +58,27 @@ class TestDeathNote {
     }
 
     @Test
-    public void testWritingCauseOfDeath1() {
+    public void testWritingCauseOfDeath1() throws InterruptedException {
         checkWritingWithoutAName();
         book.writeName("Mario");
         assertEquals(book.getDeathCause("Mario"), DeathNote.DEFAULT_DEATH_CAUSE);
         book.writeName("Sandro");
         assertTrue(book.writeDeathCause("Karting accident"));
         assertEquals(book.getDeathCause("Sandro"), "Karting accident");
-        try {
-            sleep(100);
-        } catch (InterruptedException e) {
-            fail("Sleep problem...");
-        }
+        sleep(100);
         assertFalse(book.writeDeathCause("Karting accident"));
         assertEquals(book.getDeathCause("Sandro"), DeathNote.DEFAULT_DEATH_CAUSE);
     }
 
     @Test
-    public void testWritingCauseOfDeath2() {
+    public void testWritingCauseOfDeath2() throws InterruptedException {
         checkWritingWithoutAName();
         book.writeName("Mario");
         assertNull(book.getDeathDetails("Mario"));
         assertTrue(book.writeDetails("ran for too long"));
         assertEquals(book.getDeathDetails("Mario"), "ran for too long");
         book.writeName("Sandro");
-        try {
-            sleep(6100);
-        } catch (InterruptedException e) {
-            fail("Sleep problem...");
-        }
+        sleep(6100);
         assertFalse(book.writeDetails("diarrhea"));
         assertNull(book.getDeathDetails("Sandro"));
     }
